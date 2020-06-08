@@ -1,0 +1,17 @@
+N
+a= 8N
+b= 8N
+mul=0
+sum=0
+current_a
+current_b
+for(i=0; i<N; i++)
+	{
+		current_a= a shiftright (i*8);
+		for(j=0; j<N/2-1); j++)
+		{
+			current_b= b shiftright (j*16);
+			mul= mux16X8(current_a,current_b);
+			sum= sum+ (mul shiftleft (16i+8j))
+		}
+	}
