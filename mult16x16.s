@@ -26,6 +26,24 @@ main:   # Load data from memory
 # Use the code below for 16x8 multiplication
 #   mul		<PROD>, <FACTOR1>, <FACTOR2>
 #   and		<PROD>, <PROD>, t0
+	   # Create Mask to get the first 8 bits of a
+	   ori t1,x0,0xff
+	   and t2,t3,t1
+	   mul t6, t2, t4
+	   and t6, t6, t0
+	   # Create Mask to get the last 8 bits of a
+	   ori t1,x0,0xff
+	   slli t1,t1,8
+	   and t2,t3,t1
+	   ## Shift those last 8 bits to the start of a
+       srli t2,t2,8
+	   mul t5, t2, t4
+	   and t5, t5, t0
+	   slli t5, t5, 8
+	   add t6, t6, t5
+	   
+	   
+	
 
 # End of your code
 ####################
