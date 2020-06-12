@@ -30,16 +30,26 @@ main:   # Load data from memory
 	   #Create Masks to get upper and lower bytes
 	   ori t1,x0,0xff
 	   slli t5,t1,8
-
+	   
+	   #get only the last 8 bits of b
+	   and t2,t4,t5
+	   #Check if upper byte of b is zero
+	   bne t2,x0,bnotzero
+	   mul t6,t4,t3
+	   and t6,t6,t0
+	   j finish
 	  
 
+	  
+bnotzero:
 	   #  get the first 8 bits of a
 	   and t2,t3,t1
 	   mul t6, t2, t4
 	   and t6, t6, t0
 	   #  get the last 8 bits of a
 	   and t2,t3,t5
-	   
+	   # if they are all zero - we can end the calculation here
+	   beq t2,x0,finish
 	   # Shift those last 8 bits to the start of a
        srli t2,t2,8
 	   mul t1, t2, t4
