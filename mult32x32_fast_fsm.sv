@@ -16,7 +16,7 @@ module mult32x32_fast_fsm (
 // Put your code here
 // ------------------
 
-typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, idle_st, a00b1_st, a01b1_st, a10b1_st, a11b1_st } sm_type;
+typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_st, a10b1_st, a11b1_st } sm_type;
 
 	sm_type current_state;
 	sm_type next_state;
@@ -33,12 +33,12 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, idle_st, a00b1_s
 	
 	always_comb begin
 		next_state = current_state;
-		busy = 1'b1
-		a_sel = 2'b00
-		b_sel = 1'b0
-		shift_sel = 3'b000
-		upd_prod = 1'b1
-		clr_prod = 1'b0
+		busy = 1'b1;
+		a_sel = 2'b00;
+		b_sel = 1'b0;
+		shift_sel = 3'b000;
+		upd_prod = 1'b1;
+		clr_prod = 1'b0;
 		case(current_state)
 		idle_st: begin
 			if(start == 1'b0) begin
@@ -74,12 +74,11 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, idle_st, a00b1_s
 			else if(a_msb_is_0 == 1) begin
 				next_state = a00b1_st;
 			end
-			else
-				next_state = a11b0;
+			else begin
+				next_state = a11b0_st;
 			end
-			next_state = a11b0_st;
 			
-			
+				
 		end
 		a11b0_st: begin
 			a_sel = 2'b11;
@@ -118,14 +117,15 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, idle_st, a00b1_s
 				next_state = a11b1_st;
 			end
 		end
-		a11b0_st: begin
-			next_state = a00b1_st;
-			busy = 1'b0;
+		a11b1_st: begin
+			next_state = idle_st;
+			busy = 1'b1;
 			a_sel = 2'b11;
 			b_sel = 1'b1;
 			shift_sel = 3'b101;
 		end
 		endcase
+	end
 		
 		
 // End of your code
