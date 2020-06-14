@@ -11,7 +11,7 @@ module mult32x32_fsm (
     output logic clr_prod         // Clear the product register
 );
 
-	typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, idle_st, a00b1_st, a01b1_st, a10b1_st, a11b1_st } sm_type;
+	typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_st, a10b1_st, a11b1_st } sm_type;
 
 	sm_type current_state;
 	sm_type next_state;
@@ -28,12 +28,12 @@ module mult32x32_fsm (
 	
 	always_comb begin
 		next_state = current_state;
-		busy = 1'b1
-		a_sel = 2'b00
-		b_sel = 1'b0
-		shift_sel = 3'b000
-		upd_prod = 1'b1
-		clr_prod = 1'b0
+		busy = 1'b1;
+		a_sel = 2'b00;
+		b_sel = 1'b0;
+		shift_sel = 3'b000;
+		upd_prod = 1'b1;
+		clr_prod = 1'b0;
 		case(current_state)
 		idle_st: begin
 			if(start == 1'b0) begin
@@ -88,9 +88,9 @@ module mult32x32_fsm (
 			b_sel = 1'b1;
 			shift_sel = 3'b100;
 		end
-		a11b0_st: begin
-			next_state = a00b1_st;
-			busy = 1'b0;
+		a11b1_st: begin
+			next_state = idle_st;
+			busy = 1'b1;
 			a_sel = 2'b11;
 			b_sel = 1'b1;
 			shift_sel = 3'b101;
