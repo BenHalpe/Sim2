@@ -68,7 +68,7 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_
 			b_sel = 1'b0;
 			shift_sel = 3'b010;
 			if(a_msb_is_0 == 1 && b_msw_is_0 == 1) begin
-				busy = 1'b0;
+			
 				next_state = idle_st;
 			end
 			else if(a_msb_is_0 == 1) begin
@@ -86,7 +86,7 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_
 			shift_sel = 3'b011;
 			
 			if (a_msb_is_0 == 0 && b_msw_is_0 == 1) begin
-				busy = 1'b0;
+				
 				next_state = idle_st;
 			end
 			else begin
@@ -110,7 +110,6 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_
 			b_sel = 1'b1;
 			shift_sel = 3'b100;
 			if(a_msb_is_0 == 1 && b_msw_is_0 == 0) begin
-				busy = 1'b0;
 				next_state = idle_st;
 			end
 			else begin
@@ -119,7 +118,6 @@ typedef enum { idle_st, a00b0_st, a01b0_st, a10b0_st, a11b0_st, a00b1_st, a01b1_
 		end
 		a11b1_st: begin
 			next_state = idle_st;
-			busy = 1'b1;
 			a_sel = 2'b11;
 			b_sel = 1'b1;
 			shift_sel = 3'b101;

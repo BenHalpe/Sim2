@@ -53,8 +53,8 @@ module mult32x32_fast_test;
 	   
 	@(posedge clk);
 	
-	a = {{16{1'b0}},a[15:0]};
-	b = {{16{1'b0}},b[15:0]};
+	a = 12733062;
+	b = 26738;
 	
 	@(posedge clk);
 	start= 1'b1;
@@ -63,7 +63,7 @@ module mult32x32_fast_test;
 	start= 1'b0;
 	
 	
-	repeat(4) begin
+	repeat(9) begin
             @(posedge clk);
     end
 	$stop;
